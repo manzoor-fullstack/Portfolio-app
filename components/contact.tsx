@@ -145,12 +145,12 @@ export default function Contact() {
                     <div>
                       <h4 className="font-medium">GitHub</h4>
                       <a
-                        href="https://github.com/manzoor-coder"
+                        href="https://github.com/manzoor-fullstack"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-sm text-muted-foreground hover:text-primary transition-colors"
                       >
-                        github.com/manzoor-coder
+                        github.com//manzoor-fullstack
                       </a>
                     </div>
                   </div>

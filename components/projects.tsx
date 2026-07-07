@@ -41,20 +41,20 @@ export default function Projects() {
         },
         {
           id: 2,
-          name: "Task Management App",
-          description: "A collaborative task management application with real-time updates and team workspaces.",
+          name: "Grade Calculator",
+          description: "A user-friendly web application that instantly calculates grades, GPA, percentages, and academic performance based on user input.",
           html_url: "https://github.com/username/taskmanager",
-          homepage: "https://taskmanager-demo.vercel.app",
-          topics: ["react", "nodejs", "mongodb", "websockets", "authentication"],
-          language: "JavaScript",
+          homepage: "https://gradecalculator.devfinix.com/en",
+          topics: ["nextjs", "tailwind css", "typescript"],
+          language: "TypeScript",
         },
         {
           id: 3,
-          name: "Developer Blog",
-          description: "A technical blog platform with markdown support, code syntax highlighting, and comment system.",
-          html_url: "https://github.com/username/devblog",
-          homepage: "https://devblog-demo.vercel.app",
-          topics: ["nextjs", "mdx", "tailwindcss", "cms", "serverless"],
+          name: "Significant Calculator",
+          description: "A precision-focused calculator that accurately counts and rounds significant figures according to standard scientific and mathematical rules.",
+          html_url: "https://github.com/manzoor-fullstack/significant-calculator",
+          homepage: "https://significant-calculator.devfinix.com/en",
+          topics: ["nextjs", "tailwindcss", "shadcn"],
           language: "TypeScript",
         },
         {
@@ -133,34 +133,40 @@ export function useTaskUpdates(workspaceId: string) {
   
   return { tasks }
 }`,
-    "Developer Blog": `// MDX rendering with code syntax highlighting
-import { MDXRemote } from 'next-mdx-remote'
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-import { atomDark } from 'react-syntax-highlighter/dist/cjs/styles/prism'
+    "Significant Calculator": `"use client";
 
-const components = {
-  code: ({ className, children, ...props }) => {
-    const match = /language-(\w+)/.exec(className || '')
-    return match ? (
-      <SyntaxHighlighter
-        language={match[1]}
-        style={atomDark}
-        PreTag="div"
-        {...props}
-      >
-        {String(children).replace(/\\n$/, '')}
-      </SyntaxHighlighter>
-    ) : (
-      <code className={className} {...props}>
-        {children}
-      </code>
-    )
-  }
-}
+import { useState } from "react";
+import { evaluate } from "mathjs";
+import { Equal, Link2, Save } from "lucide-react";
+import Link from "next/link";
 
-export default function BlogPost({ source }) {
-  return <MDXRemote {...source} components={components} />
-}`,
+export default function Calculator() {
+  const [input, setInput] = useState("");
+  const [result, setResult] = useState<string | null>(null);
+  const [roundTo, setRoundTo] = useState<number | null>(null);
+
+  const buttons = [
+    ["÷", "1", "2", "3", "^"],
+    ["×", "4", "5", "6", "log"],
+    ["+", "7", "8", "9", "ln"],
+    ["-", "(", "0", ")", "e"],
+  ];
+
+  // Convert UI symbols to mathjs format
+  const formatExpression = (expr: string) => {
+    return expr
+      .replace(/÷/g, "/")
+      .replace(/×/g, "*")
+      .replace(/log/g, "log10")
+      .replace(/ln/g, "log")
+      .replace(/e/g, "e");
+  };
+
+  // Round to significant figures
+  const roundToSigFigs = (num: number, sig: number) => {
+    if (num === 0) return 0;
+    return Number(num.toPrecision(sig));
+  };`,
     "Real-time Chat Application": `// Firebase real-time messaging implementation
 import { useEffect, useState } from 'react'
 import { 
