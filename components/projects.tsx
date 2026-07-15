@@ -13,7 +13,7 @@ type Repository = {
   id: number
   name: string
   description: string
-  html_url: string
+  html_url?: string
   homepage: string
   topics: string[]
   language: string
@@ -43,7 +43,7 @@ export default function Projects() {
           id: 2,
           name: "Grade Calculator",
           description: "A user-friendly web application that instantly calculates grades, GPA, percentages, and academic performance based on user input.",
-          html_url: "https://github.com/username/taskmanager",
+          // html_url: "https://github.com/username/taskmanager",
           homepage: "https://gradecalculator.devfinix.com/en",
           topics: ["nextjs", "tailwind css", "typescript"],
           language: "TypeScript",
@@ -57,23 +57,32 @@ export default function Projects() {
           topics: ["nextjs", "tailwindcss", "shadcn"],
           language: "TypeScript",
         },
+        // {
+        //   id: 4,
+        //   name: "Real-time Chat Application",
+        //   description: "A real-time messaging platform with private and group chats, file sharing, and notifications.",
+        //   html_url: "https://github.com/username/chatapp",
+        //   homepage: "https://chatapp-demo.vercel.app",
+        //   topics: ["react", "firebase", "websockets", "authentication", "notifications"],
+        //   language: "JavaScript",
+        // },
         {
           id: 4,
-          name: "Real-time Chat Application",
-          description: "A real-time messaging platform with private and group chats, file sharing, and notifications.",
-          html_url: "https://github.com/username/chatapp",
-          homepage: "https://chatapp-demo.vercel.app",
-          topics: ["react", "firebase", "websockets", "authentication", "notifications"],
-          language: "JavaScript",
+          name: "MedGo2U",
+          description: "MedGo2U is a modern UK-based physiotherapy platform that enables users to explore physiotherapy services, treatment options, and location-specific healthcare information through a fast, responsive, and user-friendly interface.",
+          // html_url: "https://github.com/username/chatapp",
+          homepage: "https://www.medgo2u.com/uk",
+          topics: ["reactjs", "nextjs", "typescript", "tailwindcss"],
+          language: "TypeScript",
         },
         {
           id: 5,
-          name: "Portfolio Generator",
+          name: "ReClub",
           description:
-            "A tool for developers to create customizable portfolio websites from templates and GitHub data.",
-          html_url: "https://github.com/username/portfolio-gen",
-          homepage: "https://portfolio-gen-demo.vercel.app",
-          topics: ["nextjs", "github-api", "tailwindcss", "templates", "customization"],
+            "ReClub is a modern real estate platform that helps users discover, explore, and manage property listings through a fast, responsive, and intuitive web experience.",
+          // html_url: "https://github.com/username/portfolio-gen",
+          homepage: "https://reclub-web.onrender.com",
+          topics: ["nextjs", "typescript", "tailwindcss", "shadcnui"],
           language: "TypeScript",
         },
         {
@@ -167,70 +176,53 @@ export default function Calculator() {
     if (num === 0) return 0;
     return Number(num.toPrecision(sig));
   };`,
-    "Real-time Chat Application": `// Firebase real-time messaging implementation
-import { useEffect, useState } from 'react'
-import { 
-  collection, 
-  query, 
-  where, 
-  orderBy, 
-  onSnapshot, 
-  addDoc, 
-  serverTimestamp 
-} from 'firebase/firestore'
-import { db, auth } from '@/lib/firebase'
+    "MedGo2U": `"use client";
 
-export function useChat(chatId) {
-  const [messages, setMessages] = useState([])
-  
-  useEffect(() => {
-    const q = query(
-      collection(db, 'messages'),
-      where('chatId', '==', chatId),
-      orderBy('createdAt')
-    )
-    
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      const newMessages = snapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      }))
-      setMessages(newMessages)
-    })
-    
-    return unsubscribe
-  }, [chatId])
-  
-  return { messages }
+import BenefitsGrid from "./Benefits/BenefitsGrid";
+import FeaturedPackage from "./FeaturedPackage/FeaturedPackage";
+import HowItWorks from "./HowItWorks/HowItWorks";
+import { packageSteps } from "./HowItWorks/stepsData";
+import PackageGrid from "./PackageCards/PackageGrid";
+
+export default function PackageTab() {
+  return (
+    <>
+      <FeaturedPackage />
+      <div className="my-8">
+        <PackageGrid />
+      </div>
+      <BenefitsGrid />
+      <HowItWorks
+        title="How it works"
+        steps={packageSteps}
+      />
+    </>
+  );
 }`,
-    "Portfolio Generator": `// Dynamic template rendering with Next.js
-import { useState, useEffect } from 'react'
-import { getGithubData } from '@/lib/github'
-import { generatePortfolio } from '@/lib/generator'
-
-export default function PortfolioBuilder({ username, template }) {
-  const [data, setData] = useState(null)
-  const [loading, setLoading] = useState(true)
-  
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const githubData = await getGithubData(username)
-        setData(githubData)
-      } catch (error) {
-        console.error('Failed to fetch GitHub data', error)
-      } finally {
-        setLoading(false)
-      }
+    "ReClub": `// Load the member's OWN on-market listings + their like / interested counts.
+  async function refresh() {
+    const myId = await getCurrentUserId();
+    const [all, postings] = await Promise.all([
+      listOnMarketProperties(),
+      myId ? getMemberOpportunities(myId) : Promise.resolve([]),
+    ]);
+    const own = myId ? all.filter((p) => p.ownerId === myId) : all;
+    const map: Record<string, { likeCount: number; interestedCount: number }> =
+      {};
+    for (const o of postings) {
+      map[o.id] = {
+        likeCount: o.likeCount,
+        interestedCount: o.interestedCount,
+      };
     }
-    
-    fetchData()
-  }, [username])
-  
-  if (loading) return <div>Loading...</div>
-  
-  return generatePortfolio(data, template)
-}`,
+    setRows(own);
+    setCounts(map);
+  }
+
+  useEffect(() => {
+    void refresh();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);`,
     "API Gateway Service": `// Express middleware for API rate limiting
 import rateLimit from 'express-rate-limit'
 import RedisStore from 'rate-limit-redis'
@@ -338,12 +330,17 @@ app.use('/api/users', userRoutes)
                       </Button>
                     </CardContent>
                     <CardFooter className="flex justify-between">
-                      <Button variant="outline" size="sm" asChild>
-                        <a href={repo.html_url} target="_blank" rel="noopener noreferrer">
-                          <Github className="mr-2 h-4 w-4" />
-                          Source
-                        </a>
-                      </Button>
+                      {repo.html_url ? (
+                        <Button variant="outline" size="sm" asChild>
+                          <a href={repo.html_url} target="_blank" rel="noopener noreferrer">
+                            <Github className="mr-2 h-4 w-4" />
+                            Source
+                          </a>
+                        </Button>
+                      ) : (
+                        <div></div>
+                      )
+                      }
                       {repo.homepage && (
                         <Button variant="default" size="sm" asChild>
                           <a href={repo.homepage} target="_blank" rel="noopener noreferrer">
