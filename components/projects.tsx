@@ -29,18 +29,18 @@ export default function Projects() {
     // Simulating API fetch
     setTimeout(() => {
       setRepos([
+        // {
+        //   id: 1,
+        //   name: "E-Commerce Platform",
+        //   description:
+        //     "A full-stack e-commerce platform with product management, cart functionality, and payment processing.",
+        //   html_url: "https://github.com/username/ecommerce",
+        //   homepage: "https://ecommerce-demo.vercel.app",
+        //   topics: ["react", "nextjs", "typescript", "prisma", "postgresql", "stripe"],
+        //   language: "TypeScript",
+        // },
         {
           id: 1,
-          name: "E-Commerce Platform",
-          description:
-            "A full-stack e-commerce platform with product management, cart functionality, and payment processing.",
-          html_url: "https://github.com/username/ecommerce",
-          homepage: "https://ecommerce-demo.vercel.app",
-          topics: ["react", "nextjs", "typescript", "prisma", "postgresql", "stripe"],
-          language: "TypeScript",
-        },
-        {
-          id: 2,
           name: "Grade Calculator",
           description: "A user-friendly web application that instantly calculates grades, GPA, percentages, and academic performance based on user input.",
           // html_url: "https://github.com/username/taskmanager",
@@ -49,7 +49,7 @@ export default function Projects() {
           language: "TypeScript",
         },
         {
-          id: 3,
+          id: 2,
           name: "Significant Calculator",
           description: "A precision-focused calculator that accurately counts and rounds significant figures according to standard scientific and mathematical rules.",
           html_url: "https://github.com/manzoor-fullstack/significant-calculator",
@@ -67,7 +67,7 @@ export default function Projects() {
         //   language: "JavaScript",
         // },
         {
-          id: 4,
+          id: 3,
           name: "MedGo2U",
           description: "MedGo2U is a modern UK-based physiotherapy platform that enables users to explore physiotherapy services, treatment options, and location-specific healthcare information through a fast, responsive, and user-friendly interface.",
           // html_url: "https://github.com/username/chatapp",
@@ -76,7 +76,7 @@ export default function Projects() {
           language: "TypeScript",
         },
         {
-          id: 5,
+          id: 4,
           name: "ReClub",
           description:
             "ReClub is a modern real estate platform that helps users discover, explore, and manage property listings through a fast, responsive, and intuitive web experience.",
@@ -85,63 +85,21 @@ export default function Projects() {
           topics: ["nextjs", "typescript", "tailwindcss", "shadcnui"],
           language: "TypeScript",
         },
-        {
-          id: 6,
-          name: "API Gateway Service",
-          description: "A microservice gateway for routing, authentication, and rate limiting of backend services.",
-          html_url: "https://github.com/username/api-gateway",
-          homepage: "",
-          topics: ["nodejs", "express", "microservices", "authentication", "rate-limiting"],
-          language: "TypeScript",
-        },
+        // {
+        //   id: 6,
+        //   name: "API Gateway Service",
+        //   description: "A microservice gateway for routing, authentication, and rate limiting of backend services.",
+        //   html_url: "https://github.com/username/api-gateway",
+        //   homepage: "",
+        //   topics: ["nodejs", "express", "microservices", "authentication", "rate-limiting"],
+        //   language: "TypeScript",
+        // },
       ])
       setLoading(false)
     }, 1000)
   }, [])
 
   const codeSnippets = {
-    "E-Commerce Platform": `// Product data fetching with SWR and TypeScript
-import useSWR from 'swr'
-import { Product } from '@/types'
-
-export function useProducts(category?: string) {
-  const { data, error, isLoading } = useSWR<Product[]>(
-    \`/api/products\${category ? \`?category=\${category}\` : ''}\`,
-    fetcher
-  )
-
-  return {
-    products: data || [],
-    isLoading,
-    isError: error
-  }
-}`,
-    "Task Management App": `// Real-time task updates with WebSockets
-import { useEffect, useState } from 'react'
-import { io, Socket } from 'socket.io-client'
-import { Task, Workspace } from '@/types'
-
-export function useTaskUpdates(workspaceId: string) {
-  const [tasks, setTasks] = useState<Task[]>([])
-  const [socket, setSocket] = useState<Socket | null>(null)
-  
-  useEffect(() => {
-    const newSocket = io('/tasks')
-    setSocket(newSocket)
-    
-    newSocket.emit('join', { workspaceId })
-    
-    newSocket.on('taskCreated', (task: Task) => {
-      setTasks(prev => [...prev, task])
-    })
-    
-    return () => {
-      newSocket.disconnect()
-    }
-  }, [workspaceId])
-  
-  return { tasks }
-}`,
     "Significant Calculator": `"use client";
 
 import { useState } from "react";
@@ -223,35 +181,6 @@ export default function PackageTab() {
     void refresh();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);`,
-    "API Gateway Service": `// Express middleware for API rate limiting
-import rateLimit from 'express-rate-limit'
-import RedisStore from 'rate-limit-redis'
-import { createClient } from 'redis'
-
-const client = createClient({
-  url: process.env.REDIS_URL
-})
-
-export const apiLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // limit each IP to 100 requests per windowMs
-  standardHeaders: true,
-  legacyHeaders: false,
-  store: new RedisStore({
-    sendCommand: (...args) => client.sendCommand(args),
-  }),
-  handler: (req, res) => {
-    res.status(429).json({
-      error: 'Too many requests, please try again later.'
-    })
-  }
-})
-
-// Usage in Express app
-app.use('/api/', apiLimiter)
-app.use('/api/auth', authRoutes)
-app.use('/api/users', userRoutes)
-`,
   }
 
   const filteredRepos =
@@ -367,11 +296,16 @@ app.use('/api/users', userRoutes)
                   viewport={{ once: true }}
                   className="scroll-mt-24"
                 >
-                  <h4 className="text-xl font-semibold mb-4">{repo.name}</h4>
-                  <CodeSnippet
-                    code={codeSnippets[repo.name] || "// Code snippet not available"}
-                    language={repo.language.toLowerCase()}
-                  />
+                  {codeSnippets[repo.name] && (
+                    <>
+                      <h4 className="text-xl font-semibold mb-4">{repo.name}</h4>
+                      <CodeSnippet
+                        code={codeSnippets[repo.name] || "// Code snippet not available"}
+                        language={repo.language.toLowerCase()}
+                      />
+                    </>
+                  )}
+
                 </motion.div>
               ))}
             </div>
