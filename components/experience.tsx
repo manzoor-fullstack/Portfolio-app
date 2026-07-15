@@ -23,7 +23,7 @@ export default function Experience() {
       technologies: ["React", "Next.js", "Node.js", "TypeScript", "PostgreSQL", "AWS"],
       responsibilities: [
         "Built a full-stack web application using MERN technology with a scalable and modular architecture",
-        "Led a team of 5 developers using Agile methodologies",
+        "Working in a team of 5 developers using Agile methodologies",
         "Implemented secure user authentication and authorization",
         "Implemented CI/CD pipelines with GitHub Actions and AWS",
         "Collaborated with UX designers to create intuitive user interfaces",
