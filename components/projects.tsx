@@ -85,15 +85,15 @@ export default function Projects() {
           topics: ["nextjs", "typescript", "tailwindcss", "shadcnui"],
           language: "TypeScript",
         },
-        // {
-        //   id: 6,
-        //   name: "API Gateway Service",
-        //   description: "A microservice gateway for routing, authentication, and rate limiting of backend services.",
-        //   html_url: "https://github.com/username/api-gateway",
-        //   homepage: "",
-        //   topics: ["nodejs", "express", "microservices", "authentication", "rate-limiting"],
-        //   language: "TypeScript",
-        // },
+        {
+          id: 5,
+          name: "Rawq Medicine Portfolio",
+          description: "A physiotherapy portfolio website showcasing services and expertise.",
+          // html_url: "https://github.com/username/api-gateway",
+          homepage: "https://rawq-med.vercel.app/",
+          topics: ["nextjs", "tailwindcss", "shadcn", "authentication"],
+          language: "TypeScript",
+        },
       ])
       setLoading(false)
     }, 1000)
@@ -181,6 +181,42 @@ export default function PackageTab() {
     void refresh();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);`,
+  "Rawq Medicine Portfolio": `export const services: Service[] = [
+  {
+    slug: "vip-physical",
+    title: "The VIP Physical",
+    badge: "Signature",
+    featured: true,
+    price: "$299",
+    priceNote:
+      "One-time visit · $50 credited toward membership if you join within 30 days",
+    description:
+      "A 90-minute comprehensive physical with basic labwork included, a personalized video review of your results, body composition analysis, and your own health roadmap.",
+    longDescription:
+      "The VIP Physical is our signature deep-dive into your health: a 90-minute, unhurried appointment that goes well beyond a standard annual exam. It includes your basic labwork, a personalized video review of those results with Dr. Farooqui, a body composition analysis, and a personal health roadmap you'll actually understand. Join Rawq Medicine within 30 days and $50 is credited toward your membership.",
+    icon: Sparkles,
+    features: [
+      "90-minute appointment",
+      "basic labwork included",
+      "Personalized video review of your lab results",
+      "Body composition analysis",
+      "Personal health roadmap",
+      "$50 credited toward membership if you join within 30 days",
+    ],
+    whoFor: [
+      "Anyone who wants a complete picture of their health",
+      "Busy professionals who value one thorough, private visit",
+      "Patients focused on prevention and longevity",
+      "Someone who wants to test-drive the DPC model before committing",
+      "Someone who wants to experience the Direct Primary Care (DPC) model before committing to a membership."
+    ],
+    details: [
+      "A 90-minute, unhurried appointment — no clock-watching",
+      "Comprehensive physical exam with basic labwork included",
+      "A personalized video review of your lab results",
+      "Body composition analysis and a personal health roadmap",
+    ],
+  },`,
   }
 
   const filteredRepos =

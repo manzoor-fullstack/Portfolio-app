@@ -36,7 +36,7 @@ export default function Skills() {
       skills: [
         { name: "Node.js", proficiency: 85 },
         { name: "Express", proficiency: 80 },
-        // { name: "NestJS", proficiency: 75 },
+        { name: "NestJS", proficiency: 75 },
         // { name: "GraphQL", proficiency: 70 },
         { name: "REST API", proficiency: 90 },
       ],
@@ -47,7 +47,7 @@ export default function Skills() {
       skills: [
         { name: "PostgreSQL", proficiency: 80 },
         { name: "MongoDB", proficiency: 85 },
-        // { name: "Prisma", proficiency: 75 },
+        { name: "Prisma", proficiency: 75 },
         { name: "SQL", proficiency: 80 },
         // { name: "Redis", proficiency: 70 },
       ],
@@ -59,6 +59,7 @@ export default function Skills() {
         // { name: "Docker", proficiency: 75 },
         // { name: "CI/CD", proficiency: 70 },
         // { name: "AWS", proficiency: 65 },
+        { name: "Render", proficiency: 75 },
         { name: "Vercel", proficiency: 85 },
         { name: "GitHub Actions", proficiency: 75 },
       ],
