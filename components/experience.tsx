@@ -32,7 +32,7 @@ export default function Experience() {
     {
       company: "Devfinix PVT LTD",
       position: "MERN Stack Developer Intern",
-      period: "Jan 2026 - Mar 2021",
+      period: "Jan 2026 - Mar 2026",
       description: "Developed Clinic Appointment & Patient Management System, Grade and Significant Calculators.",
       technologies: ["React", "Next.js", "TypeScript", "Node.js", "Express.js", "MongoDB"],
       responsibilities: [
