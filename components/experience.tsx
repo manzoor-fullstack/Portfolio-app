@@ -18,7 +18,7 @@ export default function Experience() {
     {
       company: "Dev Layers",
       position: "MERN Stack Developer",
-      period: "Jun 2026 - Present",
+      period: "Jun 2026 - Sep 2026",
       description: "Developing SaaS platforms for physiotherapists to provide services to patients UK-base and world wide.",
       technologies: ["React", "Next.js", "Node.js", "TypeScript", "PostgreSQL", "AWS"],
       responsibilities: [
