@@ -17,7 +17,7 @@ export default function Experience() {
   const experiences: Experience[] = [
     {
       company: "Dev Layers",
-      position: "MERN Stack Developer",
+      position: "MERN Stack Developer Intern",
       period: "Jun 2026 - Sep 2026",
       description: "Developing SaaS platforms for physiotherapists to provide services to patients UK-base and world wide.",
       technologies: ["React", "Next.js", "Node.js", "TypeScript", "PostgreSQL", "AWS"],
